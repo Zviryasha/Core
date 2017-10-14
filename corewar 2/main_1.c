@@ -6,13 +6,13 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/12 16:07:27 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/12 18:09:06 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/14 13:27:09 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lkorvar.h"
 
-int				na_co_la(char **s, char *ac, char **data, char **lable)
+int				na_co_la(char **s, char *ac, char **data, char **lable, struct lol *st)
 {
 	if (open_s_file(ac, s) == -1)
 		return (-1);
@@ -25,6 +25,7 @@ int				na_co_la(char **s, char *ac, char **data, char **lable)
 	}
 	if ((*lable = pars_lable(*s)) == NULL)
 		return (-1);
+	(*st).lable = pars_lable(*s);
 	return (0);
 }
 
@@ -39,7 +40,7 @@ int				bet_main(char *ac)
 	data = "";
 	if (check_file(ac) == 1)
 	{
-		if (na_co_la(&s, ac, &data, &lable) == -1)
+		if (na_co_la(&s, ac, &data, &lable, &st) == -1)
 			return (-1);
 		if (kk(s, lable, &data, &st) == NULL)
 			return (-1);

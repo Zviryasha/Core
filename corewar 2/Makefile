@@ -6,7 +6,7 @@
 #    By: opanchen <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/06 12:39:22 by opanchen          #+#    #+#              #
-#    Updated: 2017/10/12 18:36:54 by opanchen         ###   ########.fr        #
+#    Updated: 2017/10/14 20:14:23 by opanchen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,8 +50,14 @@ SRC = main.c \
 	  write_file.c \
 	  name_2.c \
 	  changes.c \
-	  main_1.c
-
+	  main_1.c \
+	  check_ldi_1.c \
+	  check_ldi_2.c  \
+	  check_ldi_3.c \
+	  check_lld_1.c \
+	  check_sti_1.c \
+	  check_and_1.c \
+	  check_zjmp_1.c
 SRO = $(SRC:.c=.o)
 
 all: $(NAME)

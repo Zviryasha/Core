@@ -6,7 +6,7 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 11:41:04 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/12 20:05:07 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/14 20:19:24 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		*kk(char *s, char *lable, char **data, struct lol *st)
 	while (str[i] != NULL)
 	{
 		check_lable_is(lable, str[i], data, st);
-		if (find_operation(str[i], lable, data, st) == -1)
+		if (find_operation(str[i], data, st) == -1)
 			return (NULL);
 		i++;
 	}
@@ -37,27 +37,27 @@ int		*kk(char *s, char *lable, char **data, struct lol *st)
 	return ((*st).a);
 }
 
-int		find_operation_1(char *s, char *lable, char **data, struct lol *st)
+int		find_operation_1(char *s, char **data, struct lol *st)
 {
 	char *r;
 
 	if (ft_strstr(s, "live ") != NULL)
 	{
-		if ((r = check_arguments_live(s, lable)) == NULL)
+		if ((r = check_arguments_live(s, data, st)) == NULL)
 			return (-1);
 		*data = ft_strjoin(*data, r);
 		return (1);
 	}
 	if (ft_strstr(s, "ldi ") != NULL || ft_strstr(s, "lldi ") != NULL)
 	{
-		if ((r = check_arguments_ldi(s, lable, data, st)) == NULL)
+		if ((r = check_arguments_ldi(s, data, st)) == NULL)
 			return (-1);
 		*data = ft_strjoin(*data, r);
 		return (1);
 	}
 	if ((ft_strstr(s, "lld ") != NULL) || (ft_strstr(s, "ld ") != NULL))
 	{
-		if ((r = check_arguments_lld(s, lable, data, st)) == NULL)
+		if ((r = check_arguments_lld(s, data, st)) == NULL)
 			return (-1);
 		*data = ft_strjoin(*data, r);
 		return (1);
@@ -65,20 +65,20 @@ int		find_operation_1(char *s, char *lable, char **data, struct lol *st)
 	return (0);
 }
 
-int		find_operation_2(char *s, char *lable, char **data, struct lol *st)
+int		find_operation_2(char *s, char **data, struct lol *st)
 {
 	char *r;
 
 	if (ft_strstr(s, "sti ") != NULL)
 	{
-		if ((r = check_arguments_sti(s, lable, data, st)) == NULL)
+		if ((r = check_arguments_sti(s, data, st)) == NULL)
 			return (-1);
 		*data = ft_strjoin(*data, r);
 		return (1);
 	}
 	if (ft_strstr(s, "st ") != NULL)
 	{
-		if ((r = check_arguments_st(s, lable, data, st)) == NULL)
+		if ((r = check_arguments_st(s, data, st)) == NULL)
 			return (-1);
 		*data = ft_strjoin(*data, r);
 		return (1);
@@ -93,14 +93,14 @@ int		find_operation_2(char *s, char *lable, char **data, struct lol *st)
 	return (0);
 }
 
-int		find_operation_3(char *s, char *lable, char **data, struct lol *st)
+int		find_operation_3(char *s, char **data, struct lol *st)
 {
 	char *r;
 
 	if (ft_strstr(s, "and ") != NULL || ft_strstr(s, "or ") != NULL ||
 			ft_strstr(s, "xor ") != NULL)
 	{
-		if ((r = check_arguments_and(s, lable, data, st)) == NULL)
+		if ((r = check_arguments_and(s, data, st)) == NULL)
 			return (-1);
 		*data = ft_strjoin(*data, r);
 		return (1);
@@ -108,7 +108,7 @@ int		find_operation_3(char *s, char *lable, char **data, struct lol *st)
 	if (ft_strstr(s, "zjmp ") != NULL || ft_strstr(s, "fork ") != NULL
 			|| ft_strstr(s, "lfork ") != NULL)
 	{
-		if ((r = check_arguments_zjmp(s, lable, data, st)) == NULL)
+		if ((r = check_arguments_zjmp(s, data, st)) == NULL)
 			return (-1);
 		*data = ft_strjoin(*data, r);
 		return (1);
@@ -116,15 +116,15 @@ int		find_operation_3(char *s, char *lable, char **data, struct lol *st)
 	return (0);
 }
 
-int		find_operation(char *s, char *lable, char **data, struct lol *st)
+int		find_operation(char *s, char **data, struct lol *st)
 {
 	char	*r;
 
-	if (find_operation_1(s, lable, data, st) == -1)
+	if (find_operation_1(s, data, st) == -1)
 		return (-1);
-	if (find_operation_2(s, lable, data, st) == -1)
+	if (find_operation_2(s, data, st) == -1)
 		return (-1);
-	if (find_operation_3(s, lable, data, st) == -1)
+	if (find_operation_3(s, data, st) == -1)
 		return (-1);
 	if (ft_strstr(s, "aff ") != NULL)
 	{

@@ -6,24 +6,17 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 04:07:00 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/10 05:07:53 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/14 11:16:39 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lkorvar.h"
 
-void	silka(char **v, char *y, char **data, char **r, struct lol *st)
+void	silka(char **v, char **data, struct lol *st, int i)
 {
-	int i;
 	int c;
 	char *f;
 
-
-	i = 0;
-	while (ft_strcmp(r[i], y) != 0)
-		i++;
-	printf("r[i] = %s\n", r[i]);
-	printf("a[i] = %d\n", (*st).a[i]);
 	c = 4384;
 	while ((*data)[c] != '\0')
 		c++;
@@ -52,25 +45,18 @@ void	silka(char **v, char *y, char **data, char **r, struct lol *st)
 	}
 }
 
-char	*silka_4(char **v, char *y, char **data, char **r, struct lol *st)
+char	*silka_4(char **v, char **data, struct lol *st, int i)
 {
-    int i;
     int c;
     char *f;
 
-
-    
-    
-    i = 0;
-    while (ft_strcmp(r[i], y) != 0)
-        i++;
     c = 4384;
     while ((*data)[c] != '\0')
         c++;
 	printf("c = %d\n", c);
     if ((c - 4384) > (*st).a[i] && (*st).a[i] != 0)
     {
-        f = pres_4(65535 - ((c - 4385 - (*st).a[i]) / 2));
+        f = pres_4(4294967295 - ((c - 4385 - (*st).a[i]) / 2));
         *v = ft_strjoin(*v, f);
     }
     else

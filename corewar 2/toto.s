@@ -18,8 +18,8 @@ label:		zjmp %:avantdebt
 
 						
 code:		live %44	 		# 6
-		zjmp 			  		%-200			# 3
-		live %42			# 5
+		zjmp %-200			# 3
+			live		 %:label
 		sti  r15,%0,r14			# 6
 		zjmp %-200			# 3
 		live %42			# 5
@@ -49,13 +49,13 @@ debt:		live %42			#5
 		sub  r10,r11,r10		#5
 		zjmp %:init			#3
 		fork %:debt			
-		live %3
+		live %9
 level0:		fork %:level10
-level11:	live %4
+level11:	live %:init	
 		fork %:level111
 
 level110:	live %42
-		ldi  %8,%:code,r15		#set des octets 9-12
+		ldi  %8    ,   %:code,   r1 	  	#set des octets 9-12
 		ld   %-186,r14			#=$A-6-8
 		ld   %0,r2
 		zjmp  %:label

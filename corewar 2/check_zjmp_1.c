@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_ldi.c                                        :+:      :+:    :+:   */
+/*   check_zjmp_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/24 16:06:22 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/14 15:48:38 by opanchen         ###   ########.fr       */
+/*   Created: 2017/10/14 20:05:10 by opanchen          #+#    #+#             */
+/*   Updated: 2017/10/14 20:12:53 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lkorvar.h"
 
-char	*check_arguments_ldi(char *s, char **data, struct lol *st)
+char	**zm(char *s, char **v)
 {
-	struct ldi	l;
-	char		*v;
+	char	**t;
+	char	*yoyo;
 
-	l.stars = "";
-	if ((l.t = ldi_1(s, &v)) == NULL)
+	if (check_operation(s) == -1)
 		return (NULL);
-	l.i = 1;
-	l.k = 0;
-	if (short_ldi(&l, st, &v, data) == -1)
-		return (NULL);
-	if (short_ldi_2(&l, st, &v, data) == -1)
-		return (NULL);
-	if (l.t[l.i + 1] != NULL || l.t[l.i][l.k] != '\0')
-		return (NULL);
-	stars_arg(l.stars, &v);
-	return (v);
+	if ((yoyo = ft_strstr(s, "zjmp ")) != NULL)
+		*v = "09";
+	else if ((yoyo = ft_strstr(s, "lfork ")) != NULL)
+		*v = "0f";
+	else if ((yoyo = ft_strstr(s, "fork ")) != NULL)
+		*v = "0c";
+	t = ft_strsplit(yoyo, ' ');
+	return (t);
 }

@@ -1,51 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_add.c                                        :+:      :+:    :+:   */
+/*   check_sti_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/24 15:04:30 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/14 19:35:17 by opanchen         ###   ########.fr       */
+/*   Created: 2017/10/14 16:42:29 by opanchen          #+#    #+#             */
+/*   Updated: 2017/10/14 20:43:13 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lkorvar.h"
 
-char	*check_arguments_add(char *s)
+char	**sti_1(char *s, char **v)
 {
-	char		*v;
-	struct ldi	l;
+	char **t;
+	char *yoyo;
 
-	l.stars = "";
-	if ((l.t = add_1(s, &v)) == NULL)
-		return (NULL);
-	l.i = 1;
-	l.k = 0;
-	if (add_2(&l, &v) == -1)
-		return (NULL);
-	if (l.t[l.i + 1] != NULL || l.t[l.i][l.k] != '\0')
-		return (NULL);
-	stars_arg(l.stars, &v);
-	return (v);
-}
-
-char	**add_1(char *s, char **v)
-{
-	char	*yoyo;
-	char	**t;
-
+	*v = "0b**";
 	if (check_operation(s) == -1)
 		return (NULL);
-	if ((yoyo = ft_strstr(s, "add ")) != NULL)
-		*v = "04**";
-	else if ((yoyo = ft_strstr(s, "sub ")) != NULL)
-		*v = "05**";
+	yoyo = ft_strstr(s, "sti ");
 	t = ft_strsplit(yoyo, ' ');
 	return (t);
 }
 
-int		add_2(struct ldi *l, char **v)
+int		short_sti(struct ldi *l, struct lol *st, char **v, char **data)
 {
 	if ((*l).t[(*l).i][(*l).k] == 'r')
 	{
@@ -56,24 +36,14 @@ int		add_2(struct ldi *l, char **v)
 		return (-1);
 	if (skip(l) == -1)
 		return (-1);
-	if ((*l).t[(*l).i][(*l).k] == 'r')
+	if (short_ldi(l, st, v, data) == -1)
+		return (-1);
+	if ((*l).t[(*l).i][(*l).k] == '%')
 	{
-		if (ldi_reg(l, v) == NULL)
+		if (ldi_dir(l, v, data, st) == NULL)
 			return (-1);
 	}
-	else
-		return (-1);
-	if (down(l, v) == -1)
-		return (-1);
-	else
-		return (0);
-}
-
-int		down(struct ldi *l, char **v)
-{
-	if (skip(l) == -1)
-		return (-1);
-	if ((*l).t[(*l).i][(*l).k] == 'r')
+	else if ((*l).t[(*l).i][(*l).k] == 'r')
 	{
 		if (ldi_reg(l, v) == NULL)
 			return (-1);

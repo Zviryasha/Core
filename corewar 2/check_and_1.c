@@ -1,60 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_st.c                                         :+:      :+:    :+:   */
+/*   check_and_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/24 14:47:26 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/14 19:02:16 by opanchen         ###   ########.fr       */
+/*   Created: 2017/10/14 19:37:47 by opanchen          #+#    #+#             */
+/*   Updated: 2017/10/14 20:04:00 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lkorvar.h"
 
-char	*check_arguments_st(char *s, char **data, struct lol *st)
-{
-	struct ldi	l;
-	char		*v;
-
-	l.stars = "";
-	if ((l.t = glgl(s, &v)) == NULL)
-		return (NULL);
-	l.i = 1;
-	l.k = 0;
-	if (st_1(&l, st, &v, data) == -1)
-		return (NULL);
-	if (l.t[l.i + 1] != NULL || l.t[l.i][l.k] != '\0')
-		return (NULL);
-	stars_arg(l.stars, &v);
-	return (v);
-}
-
-char	**glgl(char *s, char **v)
+char	**and_1(char *s, char **v)
 {
 	char	**t;
 	char	*yoyo;
 
-	*v = "03**";
 	if (check_operation(s) == -1)
 		return (NULL);
-	yoyo = ft_strstr(s, "st ");
+	if ((yoyo = ft_strstr(s, "and ")) != NULL)
+		*v = "06**";
+	else if ((yoyo = ft_strstr(s, "xor ")) != NULL)
+		*v = "08**";
+	else if ((yoyo = ft_strstr(s, "or ")) != NULL)
+		*v = "07**";
 	t = ft_strsplit(yoyo, ' ');
 	return (t);
 }
 
-int 	st_1(struct ldi *l, struct lol *st, char **v, char **data)
+int		and_2(struct ldi *l, char **v, char **data, struct lol *st)
 {
-	if ((*l).t[(*l).i][(*l).k] == 'r')
+	if ((*l).t[(*l).i][(*l).k] == '%')
 	{
-		if (ldi_reg(l, v) == NULL)
+		if (dir_4(l, v, data, st) == -1)
 			return (-1);
 	}
-	else
-		return (-1);
-	if (skip(l) == -1)
-		return (-1);
-	if ((*l).t[(*l).i][(*l).k] == 'r')
+	else if ((*l).t[(*l).i][(*l).k] == 'r')
 	{
 		if (ldi_reg(l, v) == NULL)
 			return (-1);
@@ -71,5 +53,5 @@ int 	st_1(struct ldi *l, struct lol *st, char **v, char **data)
 	}
 	else
 		return (-1);
-	return (0);
+	return (skip(l));
 }
